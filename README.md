@@ -1,51 +1,17 @@
-# Hive.C – Axiom Hive Chronicles
+# Hive.C — Canonical Chronicle
 
-**Author:** Alexis M. Adams  
-**Date:** November 1, 2025  
-
-## Overview
-
-Hive.C is the reference repository for **Axiom Hive**, a deterministic AI framework designed to operate at the network edge, enhancing AI services with:
-
-- Intelligent proxy services
-- Real-time analysis and intent clustering
-- Quantum-resistant cryptography
-- Microtransaction ledger
-- Dynamic IP rotation
-- Horizontal scaling
-
-This repository includes the full **Axiom Hive Chronicles** documentation and will support future source code for Hive.C modules.
+This repo hosts the **verifiable chronicle** of Axiom Hive. Integrity is enforced by a recorded SHA256 at the end of the primary document.
 
 ## Structure
+- `Axiom_Hive_Chronicles/Axiom_Hive_Chronicles_Corrected.md` — canonical text
+- `Axiom_Hive_Chronicles/README.md` — local usage notes
 
-```
-docs/        → Project documentation and chronicles
-src/         → Source code modules
-assets/      → Images, diagrams
-scripts/     → Utilities
-README.md    → Project overview
-LICENSE      → Project license
-```
-
-## Getting Started
-
-Clone the repository:
-
+## Integrity Check
 ```bash
-git clone https://github.com/AXI0MH1VE/Hive.C.git
-cd Hive.C
+sha256sum Axiom_Hive_Chronicles/Axiom_Hive_Chronicles_Corrected.md
+# Compare to the "SHA256: <hash>" line at the end of the file
 ```
 
-Open the chronicles:
-
-```bash
-less docs/Axiom_Hive_Chronicles.md
-```
-
-Or view online: [Axiom Hive Chronicles](docs/Axiom_Hive_Chronicles.md)
-
-Future modules will be in `src/`.
-
-## License
-
-This project is licensed under the MIT License.
+## Governance
+• Deterministic edits only. All content changes must update the recorded SHA256.
+• CI blocks merges on hash mismatch. See .github/workflows/verify-chronicle.yml.

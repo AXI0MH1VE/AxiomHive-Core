@@ -1,0 +1,35 @@
+name: Verify Chronicle Hash
+on:
+  push:
+    paths:
+      - 'docs/Axiom_Hive_Chronicles.md'
+      - '.github/workflows/verify-chronicle.yml'
+  pull_request:
+    paths:
+      - 'docs/Axiom_Hive_Chronicles.md'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compute & compare SHA256
+        id: calc
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="docs/Axiom_Hive_Chronicles.md"
+          computed="$(sha256sum "$FILE" | awk '{print $1}')"
+          recorded="$(awk -F': ' '/^SHA256/ {print $2}' "$FILE" | tail -n1 | tr -d ' \r')"
+          echo "computed=$computed" >> "$GITHUB_OUTPUT"
+          echo "recorded=$recorded" >> "$GITHUB_OUTPUT"
+          if [ -z "${recorded:-}" ]; then
+            echo "::error title=No recorded SHA256 found::Add a line 'SHA256: <hash>' at file end."
+            exit 1
+          fi
+          if [ "$computed" != "$recorded" ]; then
+            echo "::error title=Hash mismatch::computed=$computed recorded=$recorded"
+            exit 1
+          fi
+      - name: Report verified hash
+        run: echo "Verified SHA256 ${{ steps.calc.outputs.computed }}"
